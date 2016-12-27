@@ -12,6 +12,10 @@ class Vector:
         return 'unsupported operand type(s) for {}: {} and {}'.format(
             operator, self.__class__, type(other))
 
+    def __iter__(self):
+        for coord in (self.x, self.y, self.z):
+            yield coord
+
     def __repr__(self):
         return 'Vector({}, {}, {})'.format(self.x, self.y, self.z)
 
@@ -69,9 +73,16 @@ class Vector:
         self.z += other.z
 
     def __isub__(self, other):
-        self.x -= other.x
-        self.y -= other.y
-        self.z -= other.z
+        if isinstance(other, self.__class__):
+            self.x -= other.x
+            self.y -= other.y
+            self.z -= other.z
+        else:
+            self.x -= other
+            self.y -= other
+            self.z -= other
+
+        return self
 
     def __imul__(self, other):
         self.x *= other.x

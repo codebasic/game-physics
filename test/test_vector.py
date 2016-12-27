@@ -51,6 +51,11 @@ class TestVector:
 
         # assert Vector(1.2, 2.2, 3.3) / 2 == Vector(1.2/2, 2.2/2, 3.3/2)
 
+    def test_unpack(self, vectors):
+        v, *_ = vectors
+        x, y, z = v
+        assert (x,y,z) == (1,2,3)
+
     @pytest.mark.skip('Not Implemented')
     def test_cross(self, vectors):
         v1, v2 = vectors
